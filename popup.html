@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 300px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size: 13px; color: #111; }
+header { background: #4f46e5; color: #fff; padding: 12px 14px; }
+header h1 { font-size: 15px; font-weight: 700; }
+header p  { font-size: 11px; opacity: .7; margin-top: 2px; }
+section   { padding: 12px 14px; border-bottom: 1px solid #f3f4f6; }
+h2        { font-size: 10px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+.row      { display: flex; gap: 6px; margin-bottom: 5px; }
+input     { flex: 1; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 9px; font-size: 12px; outline: none; font-family: inherit; }
+input:focus { border-color: #4f46e5; }
+button    { background: #4f46e5; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+button:hover { background: #4338ca; }
+.hint     { font-size: 10px; color: #9ca3af; }
+.hint a   { color: #4f46e5; text-decoration: none; }
+.status   { font-size: 11px; margin-top: 3px; }
+.ok  { color: #16a34a; }
+.off { color: #9ca3af; }
+.item { border: 1px solid #f3f4f6; border-radius: 7px; padding: 8px 10px; margin-bottom: 6px; display: flex; gap: 6px; align-items: flex-start; }
+.item-info { flex: 1; min-width: 0; }
+.item-name  { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-price { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+.item-price strong { color: #4f46e5; }
+.item-sync  { font-size: 10px; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+.item-sync.cloud  { color: #16a34a; }
+.item-sync.local  { color: #f59e0b; }
+.del  { background: none; border: none; color: #d1d5db; cursor: pointer; font-size: 15px; padding: 0; flex-shrink: 0; }
+.del:hover { color: #ef4444; }
+#empty { font-size: 12px; color: #9ca3af; }
+</style>
+</head>
+<body>
+<header>
+  <h1>✈ PricePilot AU</h1>
+  <p>Real-time AU price comparison + AI</p>
+</header>
+
+<section>
+  <h2>Backend URL — unlocks all retailers</h2>
+  <div class="row">
+    <input type="text" id="backend-url" placeholder="https://your-app.up.railway.app" />
+    <button onclick="save()">Save</button>
+  </div>
+  <div class="status off" id="backend-status">Not set — using Amazon, eBay, StaticICE</div>
+  <div class="hint">Deploy pricepilot-backend to Railway for JB Hi-Fi, Harvey Norman, The Iconic etc.</div>
+</section>
+
+<section>
+  <h2>Alert email — 24/7 price drop notifications</h2>
+  <div class="row">
+    <input type="email" id="alert-email" placeholder="you@example.com" autocomplete="email" />
+    <button onclick="save()">Save</button>
+  </div>
+  <div class="status off" id="email-status">No email — alerts only fire when browser is open</div>
+  <div class="hint">Set this to get emailed when a price drops, even when your browser is closed.</div>
+</section>
+
+<section>
+  <h2>Claude API key — enables AI features</h2>
+  <div class="row">
+    <input type="password" id="api-key" placeholder="sk-ant-…" autocomplete="off" />
+    <button onclick="save()">Save</button>
+  </div>
+  <div class="status off" id="key-status">No key — AI verdict and chat disabled</div>
+  <div class="hint">Free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></div>
+</section>
+
+<section>
+  <h2>Price alerts</h2>
+  <div id="tracked-list"><div id="empty">No alerts set. Browse any product to set one.</div></div>
+</section>
+
+<script>
+function esc(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+chrome.runtime.sendMessage({ type: "SETTINGS_GET" }, d => {
+  if (d.apiKey) {
+    document.getElementById("key-status").textContent = "✓ API key saved — AI features active";
+    document.getElementById("key-status").className = "status ok";
+    document.getElementById("api-key").placeholder = "Saved API key";
+  }
+  if (d.backendUrl) {
+    document.getElementById("backend-url").value = d.backendUrl;
+    document.getElementById("backend-status").textContent = "✓ Backend connected — full coverage active";
+    document.getElementById("backend-status").className = "status ok";
+  } else {
+    document.getElementById("backend-status").textContent = "Not set — using Amazon, eBay, StaticICE";
+    document.getElementById("backend-status").className = "status off";
+  }
+  if (d.alertEmail) {
+    document.getElementById("alert-email").value = d.alertEmail;
+    document.getElementById("email-status").textContent = "✓ Email saved — 24/7 server alerts active";
+    document.getElementById("email-status").className = "status ok";
+  }
+});
+
+function save() {
+  const key     = document.getElementById("api-key").value.trim();
+  const backend = document.getElementById("backend-url").value.trim().replace(/\/$/, "");
+  const email   = document.getElementById("alert-email").value.trim().toLowerCase();
+  const payload = { type: "SETTINGS_SAVE", backendUrl: backend, alertEmail: email };
+  if (key) payload.apiKey = key;
+  chrome.runtime.sendMessage(payload, () => {
+    if (key)     { const s = document.getElementById("key-status");     s.textContent = "✓ API key saved — AI features active"; s.className = "status ok"; }
+    if (backend) { const s = document.getElementById("backend-status"); s.textContent = "✓ Backend connected — full coverage active"; s.className = "status ok"; }
+    if (email)   { const s = document.getElementById("email-status");   s.textContent = "✓ Email saved — 24/7 server alerts active"; s.className = "status ok"; }
+  });
+}
+
+chrome.runtime.sendMessage({ type: "TRACK_GET" }, ({ tracked }) => {
+  const el = document.getElementById("tracked-list");
+  if (!tracked?.length) return;
+  el.innerHTML = tracked.map(t => {
+    const name   = t.name.length > 36 ? t.name.slice(0, 36) + "…" : t.name;
+    const synced = t.backendId
+      ? `<div class="item-sync cloud">☁ Monitored 24/7 by server</div>`
+      : `<div class="item-sync local">⚠ Browser-only — add email for 24/7 alerts</div>`;
+    return `<div class="item" id="t${t.id}">
+      <div class="item-info">
+        <div class="item-name" title="${esc(t.name)}">${esc(name)}</div>
+        <div class="item-price">$${(t.currentPrice||0).toFixed(2)} → alert at <strong>$${(t.targetPrice||0).toFixed(2)}</strong></div>
+        ${synced}
+      </div>
+      <button class="del" onclick="del(${t.id},'${esc(t.backendId||'')}')">✕</button>
+    </div>`;
+  }).join("");
+});
+
+function del(id, backendId) {
+  chrome.runtime.sendMessage({ type: "TRACK_DEL", id, backendId }, () => {
+    document.getElementById("t" + id)?.remove();
+    if (!document.querySelector(".item")) document.getElementById("tracked-list").innerHTML = '<div id="empty">No alerts set.</div>';
+  });
+}
+</script>
+</body>
+</html>

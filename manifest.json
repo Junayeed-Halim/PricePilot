@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "PricePilot AU",
+  "version": "1.0.0",
+  "description": "Free real-time price comparison across 18+ Australian retailers. AI deal advice, 24/7 email alerts, no subscription needed.",
+  "permissions": ["storage", "alarms", "notifications"],
+  "host_permissions": ["https://*/*"],
+  "minimum_chrome_version": "116",
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [{
+    "matches": ["https://*/*"],
+    "js": ["content.js"],
+    "css": ["panel.css"],
+    "run_at": "document_idle"
+  }],
+  "action": { "default_popup": "popup.html", "default_title": "PricePilot AU" },
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+}
