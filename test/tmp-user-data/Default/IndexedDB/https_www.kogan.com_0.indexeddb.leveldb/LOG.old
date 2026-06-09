@@ -1,0 +1,7 @@
+2026/06/09-01:12:50.107 116e0 Reusing MANIFEST C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\IndexedDB\https_www.kogan.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/06/09-01:12:50.110 116e0 Recovering log #4
+2026/06/09-01:12:50.114 116e0 Reusing old log C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\IndexedDB\https_www.kogan.com_0.indexeddb.leveldb/000004.log 
+2026/06/09-01:12:50.749 116e0 Level-0 table #8: started
+2026/06/09-01:12:50.785 116e0 Level-0 table #8: 1374 bytes OK
+2026/06/09-01:12:50.790 116e0 Delete type=0 #4
+2026/06/09-01:12:50.792 116e0 Manual compaction at level-0 from '\x00\x02\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x03\x00\x00\x00' @ 0 : 0; will stop at (end)

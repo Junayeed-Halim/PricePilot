@@ -1,0 +1,13 @@
+2026/06/09-01:13:32.995 116e0 Reusing MANIFEST C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\IndexedDB\https_cottonon.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/06/09-01:13:32.998 116e0 Recovering log #7
+2026/06/09-01:13:32.999 116e0 Reusing old log C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\IndexedDB\https_cottonon.com_0.indexeddb.leveldb/000007.log 
+2026/06/09-01:13:33.396 43b8 Level-0 table #11: started
+2026/06/09-01:13:33.426 43b8 Level-0 table #11: 1433 bytes OK
+2026/06/09-01:13:33.433 43b8 Delete type=0 #7
+2026/06/09-01:13:33.437 116e0 Manual compaction at level-0 from '\x00\x04\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at '\x00\x04\x01\x03\x03\x00\x00\x00\x00\x00\x00\xf0?' @ 225 : 1
+2026/06/09-01:13:33.439 116e0 Compacting 1@0 + 1@1 files
+2026/06/09-01:13:33.477 116e0 Generated table #12@0: 31 keys, 633 bytes
+2026/06/09-01:13:33.477 116e0 Compacted 1@0 + 1@1 files => 633 bytes
+2026/06/09-01:13:33.482 116e0 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/09-01:13:33.485 116e0 Delete type=2 #11
+2026/06/09-01:13:33.486 116e0 Manual compaction at level-0 from '\x00\x04\x01\x03\x03\x00\x00\x00\x00\x00\x00\xf0?' @ 225 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at (end)

@@ -1,0 +1,9 @@
+2026/06/09-01:09:55.420 7d54 Reusing MANIFEST C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\Local Storage\leveldb/MANIFEST-000001
+2026/06/09-01:09:55.430 7d54 Recovering log #9
+2026/06/09-01:09:55.439 7d54 Reusing old log C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\Local Storage\leveldb/000009.log 
+2026/06/09-01:10:38.585 dea0 Level-0 table #13: started
+2026/06/09-01:10:38.610 dea0 Level-0 table #13: 30636 bytes OK
+2026/06/09-01:10:38.617 dea0 Delete type=0 #9
+2026/06/09-01:12:06.214 dea0 Level-0 table #15: started
+2026/06/09-01:12:06.241 dea0 Level-0 table #15: 26571 bytes OK
+2026/06/09-01:12:06.247 dea0 Delete type=0 #12

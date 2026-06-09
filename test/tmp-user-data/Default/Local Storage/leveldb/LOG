@@ -1,0 +1,18 @@
+2026/06/09-01:17:15.393 c75c Reusing MANIFEST C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\Local Storage\leveldb/MANIFEST-000001
+2026/06/09-01:17:15.404 c75c Recovering log #14
+2026/06/09-01:17:15.411 c75c Reusing old log C:\Users\junye\Downloads\PricePilot-Backend (1)\backend\test\tmp-user-data\Default\Local Storage\leveldb/000014.log 
+2026/06/09-01:17:22.271 bae4 Level-0 table #18: started
+2026/06/09-01:17:22.305 bae4 Level-0 table #18: 29611 bytes OK
+2026/06/09-01:17:22.319 bae4 Delete type=0 #14
+2026/06/09-01:17:22.331 bae4 Compacting 4@0 + 1@1 files
+2026/06/09-01:17:22.372 bae4 Generated table #19@0: 574 keys, 45755 bytes
+2026/06/09-01:17:22.372 bae4 Compacted 4@0 + 1@1 files => 45755 bytes
+2026/06/09-01:17:22.373 bae4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/06/09-01:17:22.377 bae4 Delete type=2 #7
+2026/06/09-01:17:22.377 bae4 Delete type=2 #10
+2026/06/09-01:17:22.377 bae4 Delete type=2 #13
+2026/06/09-01:17:22.377 bae4 Delete type=2 #15
+2026/06/09-01:17:22.377 bae4 Delete type=2 #18
+2026/06/09-01:20:43.655 bae4 Level-0 table #21: started
+2026/06/09-01:20:43.682 bae4 Level-0 table #21: 60875 bytes OK
+2026/06/09-01:20:43.688 bae4 Delete type=0 #17
